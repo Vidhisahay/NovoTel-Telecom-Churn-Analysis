@@ -58,7 +58,7 @@ The insights from this analysis will support NovaTel in making data-driven decis
 </td>
 <td width="45%" style="vertical-align: top;">
 
-<img src="Visualizations/Univariate Analysis (Numerical Columns).png" width="100%" />
+<img src="Visualizations/Analytics/Univariate Analysis (Numerical Columns).png" width="100%" />
 
 </td>
 </tr>
@@ -76,7 +76,7 @@ The insights from this analysis will support NovaTel in making data-driven decis
 </td>
 <td width="45%" style="vertical-align: top;">
 
-<img src="Visualizations/Histogram Plots.png" width="100%" />
+<img src="Visualizations/Analytics/Histogram Plots.png" width="100%" />
 
 </td>
 </tr>
@@ -94,7 +94,7 @@ The insights from this analysis will support NovaTel in making data-driven decis
 </td>
 <td width="45%" style="vertical-align: top;">
 
-<img src="Visualizations/Bivariate Analysis (Categorical).png" width="100%" />
+<img src="Visualizations/Analytics/Bivariate Analysis (Categorical).png" width="100%" />
 
 </td>
 </tr>
@@ -113,7 +113,7 @@ The insights from this analysis will support NovaTel in making data-driven decis
 </td>
 <td width="45%" style="vertical-align: top;">
 
-<img src="Visualizations/Bivariate Analysis (Numerical).png" width="100%" />
+<img src="Visualizations/Analytics/Bivariate Analysis (Numerical).png" width="100%" />
 
 </td>
 </tr>
@@ -131,7 +131,7 @@ The insights from this analysis will support NovaTel in making data-driven decis
 </td>
 <td width="45%" style="vertical-align: top;">
 
-<img src="Visualizations/Correlation Heatmap.png" width="100%" />
+<img src="Visualizations/Analytics/Correlation Heatmap.png" width="100%" />
 
 </td>
 </tr>
@@ -150,7 +150,7 @@ The insights from this analysis will support NovaTel in making data-driven decis
 </td>
 <td width="45%" style="vertical-align: top;">
 
-<img src="Visualizations/Heatmap (All Features).png" width="100%" />
+<img src="Visualizations/Analytics/Heatmap (All Features).png" width="100%" />
 
 </td>
 </tr>
