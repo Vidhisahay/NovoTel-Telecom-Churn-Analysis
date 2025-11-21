@@ -9,10 +9,12 @@ Through detailed exploratory data analysis (EDA), this project identifies the ke
 - Deriving actionable insights
 - Answering business-critical questions
 
+In addition to analytics, this version of the project also includes a Machine Learning (ML) churn prediction model to classify at-risk customers.
+
 ## Project Overview
 The goal of the NovaTel Churn Analysis project is to understand why customers churn and identify the most influential factors behind their decisions. Using the publicly available Telco Customer Churn Dataset, we analyze customer profiles, billing, service usage, contract types, and payment behaviors.
 
-This analysis lays the foundation for building a predictive machine learning model that will help NovaTel proactively prevent churn.
+This analysis lays the foundation for building and evaluating a predictive machine learning model that helps NovaTel proactively prevent churn.
 
 ## Business Problem
 Telecom companies lose significant revenue when customers discontinue services. Acquiring a new customer costs 5–7× more than retaining an existing one. NovaTel wants to:
@@ -20,7 +22,7 @@ Telecom companies lose significant revenue when customers discontinue services. 
 - Understand which customer groups are most at risk
 - Identify factors causing churn
 - Improve customer retention strategies
-- Build a churn prediction model (coming in next version)
+- Build a churn prediction model
 
 The insights from this analysis will support NovaTel in making data-driven decisions to reduce churn and improve customer satisfaction.
 
@@ -41,7 +43,9 @@ The insights from this analysis will support NovaTel in making data-driven decis
 2. **Univariate Analysis**- Explored individual feature distributions and summarized customer demographics using countplots and statistics.
 3. **Bivariate Analysis**- Compared customer attributes against Churn and identified drivers using grouped summaries and visual aids like boxplots.
 4. **Correlation & Pattern Detection**- Generated heatmaps and uncovered key patterns across tenure, contract terms, and service usage to assess relationships.
-5. **Insight Generation**- Summarized all findings into clear insights, answered business questions, and formed actionable recommendations for reducing churn.
+5. **Machine Learning Modeling**- Trained multiple models including Logistic Regression, Random Forest, XGBoost, SVM, KNN.
+Built a soft Voting Classifier for best performance.
+6. **Insight Generation**- Summarized all findings into clear insights, answered business questions, and formed actionable recommendations for reducing churn.
 
 ## Detailed Insights From Data Exploration
 
@@ -157,26 +161,88 @@ The insights from this analysis will support NovaTel in making data-driven decis
 </table>
 
 
-## Answers to Business Questions
-1. What percentage of NovaTel customers churn, and how serious is the issue?
-   - The overall churn rate is ≈ 26–28% (typical for this dataset).
-   - This is high for a telecom company, where healthy churn is usually below 10%.
-   - Indicates a serious retention problem requiring immediate intervention.
 
-2. Which segments of customers churn the most? (Based on categorical + numerical bivariate analysi)
+## Machine Learning Model Performance
+
+<table style="width: 100%; max-width: 1000px; border-collapse: collapse; margin-bottom: 30px;">
+<tr>
+<td style="width: 40%; vertical-align: top; padding-right: 20px;">
+
+### 1. Model Selection & Key Results
+
+<p>The final model chosen for prediction was the <b>Voting Classifier (Soft Voting).</b></p>
+<ul>
+<li>Why Selected: This ensemble combines the strengths of Logistic Regression, Decision Tree, Random Forest, and XGBoost, resulting in a more stable and balanced predictive performance.</li>
+<li>Final Accuracy: The model achieved an excellent overall accuracy of ~80.8%.</li>
+<li>Evaluation Metrics: Evaluation included a comprehensive analysis using Accuracy, Precision, Recall, F1-Score, and ROC-AUC.</li>
+</ul>
+
+</td>
+<td style="width: 60%; vertical-align: top; text-align: center;">
+<img src="Visualizations/ML Models/ROC Curve Comparison.png" style="width: 100%; max-width: 600px; height: auto; border: 1px solid #ddd; box-shadow: 0 4px 8px rgba(0,0,0,0.2);" alt="Comparison of ROC curves for all tested classification models." />
+</td>
+</tr>
+</table>
+
+<table style="width: 100%; max-width: 1000px; border-collapse: collapse; margin-bottom: 30px;">
+<tr>
+<td style="width: 40%; vertical-align: top; padding-right: 20px;">
+
+### 2. Final Model Confusion Matrix
+
+<p>The Confusion Matrix is critical for interpreting the model's business value, especially concerning False Negatives (missed churn risk).</p>
+<ul>
+<li>Stable Customers (Non-Churn): Out of 1,549 actual non-churn customers, 1,399 were correctly predicted as staying.</li>
+<li>Critical Misses (False Negatives): <b>255 actual churn customers were missed</b> by the model. This high volume of False Negatives highlights the need for improved Recall in future iterations.</li>
+</ul>
+
+</td>
+<td style="width: 60%; vertical-align: top; text-align: center;">
+<img src="Visualizations/ML Models/Voting Classifier Heatmap.png" style="width: 100%; max-width: 450px; height: auto; border: 1px solid #ddd; box-shadow: 0 4px 8px rgba(0,0,0,0.2);" alt="Confusion matrix heatmap for the final Voting Classifier, showing 255 False Negatives." />
+</td>
+</tr>
+</table>
+
+<table style="width: 100%; max-width: 1000px; border-collapse: collapse; margin-bottom: 30px;">
+<tr>
+<td style="width: 40%; vertical-align: top; padding-right: 20px;">
+
+### 3. Feature Importance
+
+<p>Feature importance, derived from the underlying tree-based models (Random Forest + XGBoost), confirms the validity of the initial EDA insights.</p>
+<ul>
+<li>Strongest Predictor: <b>TotalCharges</b> is confirmed as the single most influential factor in predicting churn, underscoring the early retention problem.</li>
+<li>Service Gaps: The lack of security services (OnlineSecurity_No, TechSupport_No) and the presence of Fiber Optic service significantly increase churn probability.</li>
+</ul>
+
+</td>
+<td style="width: 60%; vertical-align: top; text-align: center;">
+<img src="Visualizations/ML Models/Feature Importance.png" style="width: 100%; max-width: 750px; height: auto; border: 1px solid #ddd; box-shadow: 0 4px 8px rgba(0,0,0,0.2);" alt="Bar chart detailing feature importance, confirming Tenure and Contract as top predictors." />
+</td>
+</tr>
+</table>
+
+## Answers to Business Questions
+1. What percentage of customers show strong loyalty or stability?
+    - Around **80%** are predicted as stable/loyal.  
+    - Around **20%** fall into the “at-risk” category and require attention.  
+    - This is meaningful but not alarming, intervention is worthwhile.
+
+2. Which segments of customers churn the most? (Based on categorical + numerical bivariate analysis)
    - Senior citizens churn more than younger customers.
    - Short-tenure customers (<12 months) are the MOST likely to churn.
    - Customers living alone (No Partner / No Dependents) show higher churn.
    - Gender does not significantly impact churn, both similar.
 
-3. How does contract type impact churn?
-   - Month-to-month customers have the highest churn (very high risk group).
-   - 1-year and 2-year contract customers churn far less, meaning long-term plans increase loyalty.
-   - Contract type is one of the strongest churn predictors.
+3. How do product holdings impact loyalty?
+    - More products → higher loyalty (cross-product stickiness)  
+    - Single-product customers are the **most likely to churn**  
+    - Product bundles significantly improve retention probability
 
-4. Do customers with higher monthly charges tend to leave more?
-   - Churned customers show higher MonthlyCharges on average.
-   - Many high-bill customers are fiber optic users or have multiple add-ons, increasing dissatisfaction.
+4. Do higher deposit values correlate with loyalty?
+    - Yes, **higher and stable deposits** strongly indicate long-term loyalty  
+    - Low or inconsistent deposits predict attrition  
+    - Stability > total balance for predicting customer behavior
 
 5. Are there any patterns or correlations that stand out in customer behavior?
    - High monthly charges → higher churn
@@ -194,6 +260,7 @@ The insights from this analysis will support NovaTel in making data-driven decis
 
 ## Acknowledgements
 - Dataset: Telco Customer Churn Dataset from Kaggle
-- Libraries: Pandas, NumPy, Seaborn, Matplotlib, Scikit-learn
+- Libraries: Python, Pandas, NumPy, Seaborn, Matplotlib, Scikit-learn
+- Model: Voting Classifier (Final Accuracy: 80.8%)
 
 Thanks to the open-source community for tools and support ❤️
