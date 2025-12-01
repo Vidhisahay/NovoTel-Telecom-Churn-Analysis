@@ -11,6 +11,8 @@ Through detailed exploratory data analysis (EDA), this project identifies the ke
 
 In addition to analytics, this version of the project also includes a Machine Learning (ML) churn prediction model to classify at-risk customers.
 
+![Dashboard](https://github.com/Vidhisahay/NovoTel-Telecom-Churn-Analysis/blob/main/Visualizations/Analytics/Dashboard%20Mockup.png)
+
 ## Project Overview
 The goal of the NovaTel Churn Analysis project is to understand why customers churn and identify the most influential factors behind their decisions. Using the publicly available Telco Customer Churn Dataset, we analyze customer profiles, billing, service usage, contract types, and payment behaviors.
 
